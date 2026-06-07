@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AI Risk Tracker — Dark-first, precision governance aesthetic
+   Palette: Deep slate navy + amber/gold accent (signals, alerts, intelligence) */
+
+@layer base {
+  :root {
+    /* Surfaces — deep slate */
+    --background: 222 20% 8%;
+    --foreground: 215 20% 88%;
+
+    --card: 222 18% 11%;
+    --card-foreground: 215 20% 88%;
+
+    --popover: 222 18% 11%;
+    --popover-foreground: 215 20% 88%;
+
+    /* Primary — amber/gold for intelligence signals */
+    --primary: 38 92% 55%;
+    --primary-foreground: 222 20% 8%;
+
+    /* Secondary — muted slate */
+    --secondary: 222 15% 16%;
+    --secondary-foreground: 215 15% 70%;
+
+    /* Muted */
+    --muted: 222 15% 14%;
+    --muted-foreground: 215 12% 52%;
+
+    /* Accent — teal for positive signals */
+    --accent: 185 65% 38%;
+    --accent-foreground: 215 20% 88%;
+
+    /* Destructive — red for critical risks */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 215 20% 88%;
+
+    /* Border / input */
+    --border: 222 12% 20%;
+    --input: 222 12% 20%;
+    --ring: 38 92% 55%;
+
+    --radius: 0.5rem;
+
+    /* Severity colors */
+    --severity-critical: 0 72% 51%;
+    --severity-high: 25 85% 52%;
+    --severity-medium: 38 92% 55%;
+    --severity-low: 142 60% 45%;
+
+    /* Chart colors */
+    --chart-1: 38 92% 55%;
+    --chart-2: 185 65% 45%;
+    --chart-3: 25 85% 52%;
+    --chart-4: 142 60% 45%;
+    --chart-5: 270 60% 60%;
+  }
+
+  /* Light mode variant */
+  .light {
+    --background: 220 20% 97%;
+    --foreground: 222 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 25% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 25% 12%;
+    --primary: 38 85% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 93%;
+    --secondary-foreground: 222 18% 35%;
+    --muted: 220 14% 93%;
+    --muted-foreground: 222 12% 50%;
+    --accent: 185 55% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 85%;
+    --input: 220 13% 85%;
+    --ring: 38 85% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cabinet Grotesk', 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p, li {
+    text-wrap: pretty;
+    max-width: 72ch;
+  }
+}
+
+/* Severity badge utilities */
+.severity-critical { @apply bg-red-500/15 text-red-400 border border-red-500/30; }
+.severity-high { @apply bg-orange-500/15 text-orange-400 border border-orange-500/30; }
+.severity-medium { @apply bg-yellow-500/15 text-yellow-400 border border-yellow-500/30; }
+.severity-low { @apply bg-green-500/15 text-green-400 border border-green-500/30; }
+
+/* Pulse animation for live indicator */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Card hover elevation */
+.risk-card {
+  transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s cubic-bezier(0.16,1,0.3,1), border-color 0.18s ease;
+}
+.risk-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
